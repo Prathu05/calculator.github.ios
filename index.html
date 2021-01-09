@@ -1,0 +1,190 @@
+<html>
+	<head>
+		<title>Normal Calculator </title>
+			<meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+			<style>
+				.buttons {
+					display:inline-block;
+					margin: auto; border-radius : 10%;
+					width: 23.5%;
+					height: 40px;
+					margin-bottom: 5px;
+					background-color: #999990;
+					color: #fff;
+				}
+				.buttons2 {
+					display:inline-block;
+					margin: auto; border-radius : 10%;
+					width: 23.5%;
+					height: 40px;
+					margin-bottom: 5px;
+					background-color: #fff;
+					color: #777;
+				}
+				.buttons3 {
+					display:inline-block;
+					margin: auto; border-radius : 10%;
+					width: 48.5%;
+					height: 40px;
+					margin-bottom: 5px;
+					background-color: #999990;
+					color: #fff;
+				}
+				.calc {
+					border: 5px solid #222;
+					border-style: dashed;	
+				}
+				p {
+					text-align:left;font-family:cursive;font-size:20px;
+				}
+			</style>
+	</head>
+		<body style="background-color: #39cccc;">
+			<p style="text-align:center;font-family:cursive;font-size:40px;"> Calculator</p><br>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 mx-auto">
+						<div class="calc">
+						<p class="ml-1">Enter value :</p>
+							<div class="bg-secondary mt-2 ml-1 mr-1">
+								<form action="/action_page.php">
+									<div class="form-group">
+										<input type="text" class="form-control text-right" id="anyinput" readonly>
+									</div>
+								</form>
+							</div>
+							<div class="pdy text-center ml-1 mr-1">
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(9)"><strong>9</strong></button>
+								</div>
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(8)"><strong>8</strong></button>								
+								</div>							
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(7)"><strong>7</strong></button>								
+								</div>							
+								<div class="buttons">
+									<button type="button" class="btn" onclick="operation('+')"><strong>+</strong></button>
+								</div>
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(6)"><strong>6</strong></button>
+								</div>
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(5)"><strong>5</strong></button>
+								</div>
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(4)"><strong>4</strong></button>
+								</div>
+								<div class="buttons">
+									<button type="button" class="btn" onclick="operation('-')"><strong> - </strong></button>								
+								</div>				
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(3)"><strong>3</strong></button>								
+								</div>
+								<div class="buttons2">
+									<button type="button" class="btn" onclick="insertvalue(2)"><strong>2</strong></button>
+								</div>
+								<div class="buttons2">								
+									<button type="button" class="btn" onclick="insertvalue(1)"><strong>1</strong></button>
+								</div>							
+								<div class="buttons">								
+									<button type="button" class="btn" onclick="operation('*')"><strong>*</strong></button>
+								</div>				
+								<div class="buttons bg-success">
+									<button type="button" class="btn" onclick="operation('=')"><strong>=</strong></button>								
+								</div>	
+								<div class="buttons">
+									<button type="button" class="btn" onclick="insertvalue(0)"><strong>0</strong></button>							
+								</div>	
+								<div class="buttons">
+									<button type="button" class="btn" onclick="insertvalue('.')"><strong>.</strong></button>								
+								</div>						
+								<div class="buttons">
+									<button type="button" class="btn" onclick="operation('/')"><strong>/</strong></button>								
+								</div>
+								<div class="buttons3">
+									<button type="button" class="btn" onclick="delvalue()"><strong>C</strong></button>								
+								</div>			
+								<div class="buttons3 bg-danger">
+									<button type="button" class="btn" onclick="clearvalue()"><strong>AC</strong></button>								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				
+				var store = " ";
+				function operation(m) {
+						insertvalue(m);
+					if (store == " "){
+						store = m;
+						return;
+					}
+					
+					var p = str.slice(-1);
+					
+					var k = str.substring(0, str.length - 1);
+					
+					var b = k.split(store);
+					
+					var value1 = Number(b[0]);
+					var value2 = Number(b[1]);
+				
+					switch (store) {
+						case "+" :  
+								str = (value1 + value2).toString() ;
+								store = " ";
+								
+							break;
+						case "-" : 
+								str = (value1 - value2).toString();
+								store = " ";
+							break;
+						case "*" : 
+								str = (value1 * value2).toString();
+								store = " ";
+							break;			
+						case "/" : ;
+								str = (value1 / value2).toString();
+								store = " ";
+							break;
+						default :
+						
+					}if (p != "=") {
+							str += p;
+							store = p; 
+						}
+					document.getElementById("anyinput").value = str;
+				}			
+							
+						var str = "";
+						
+						function insertvalue(n){
+							var t = str.indexOf('.');
+							if(t != -1 && n == '.'){
+								return;
+							}
+							str += n;		
+							document.getElementById("anyinput").value = str;
+							
+						}	
+						function clearvalue() {
+							str = "";	
+							document.getElementById("anyinput").value = str;
+						}	
+						function delvalue() {
+							str = str.substring(0, str.length-1);
+							document.getElementById("anyinput").value = str;
+						}
+						
+			</script>
+		</body>
+	
+</html>
